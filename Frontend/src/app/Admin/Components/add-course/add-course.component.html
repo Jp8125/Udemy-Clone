@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-6 col-lg-4 mt-1">
+            <h6 class="my-3">Add Course</h6>
+            <div class="alert alert-danger" role="alert" *ngIf="issubmited&&showError">
+               pls check if the field are valid or not
+              </div>
+              
+            <form [formGroup]="CourseForm">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        placeholder="Course Title" formControlName="name" />
+                    <label for="floatingInput">Course Title</label>
+                    <div *ngIf="CourseForm.controls['name'].invalid && (CourseForm.controls['name'].dirty || CourseForm.controls['name'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="CourseForm.controls['name'].errors?.['required']"><em class="fa-solid fa-circle-exclamation me-2"></em>Please enter Course name</div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        placeholder="Price" formControlName="price" />
+                    <label for="floatingInput">Price</label>
+                    <div *ngIf="CourseForm.controls['price'].invalid && (CourseForm.controls['price'].dirty || CourseForm.controls['price'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="CourseForm.controls['price'].errors?.['required']"><em class="fa-solid fa-circle-exclamation me-2"></em>Please enter price</div>
+                        <div *ngIf="CourseForm.controls['price'].errors?.['pattern']">Price Should be in Digit Format</div>
+                        <div *ngIf="CourseForm.controls['price'].errors?.['max']">Maximum amount Of the Course is 100000</div>
+                        <div *ngIf="CourseForm.controls['price'].errors?.['min']">Minimum amount Of the Course is 0</div>
+                    </div>
+                
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        placeholder="duration" formControlName="duration" />
+                    <label for="floatingInput">Duration</label>
+                    <div *ngIf="CourseForm.controls['duration'].invalid && (CourseForm.controls['duration'].dirty || CourseForm.controls['duration'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="CourseForm.controls['duration'].errors?.['required']"><em class="fa-solid fa-circle-exclamation me-2"></em>Please enter duration</div>
+                        <div *ngIf="CourseForm.controls['duration'].errors?.['pattern']">Duration Should be in Digit Format</div>
+                        <div *ngIf="CourseForm.controls['duration'].errors?.['max']">max hours can be added is 100</div>
+                        <div *ngIf="CourseForm.controls['duration'].errors?.['min']">min hours can be 1</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input (change)="Method1($event)" class="form-control form-control-lg rounded-0 border border-dark"
+                        id="formFileLg" type="file" formControlName="thumbnailSrc" />
+                    <div *ngIf="CourseForm.controls['thumbnailSrc'].invalid && (CourseForm.controls['thumbnailSrc'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="CourseForm.controls['thumbnailSrc'].errors?.['required']"><em class="fa-solid fa-circle-exclamation me-2"></em>Please prvide Thumbnail
+                        </div>
+                        <div *ngIf="fileerror">File type Should Be jpeg or png</div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control rounded-0 border border-dark" placeholder="Leave a comment here"
+                        id="floatingTextarea2" style="height: 100px" formControlName="description"></textarea>
+                    <label for="floatingTextarea2">Description</label>
+                    <div *ngIf="CourseForm.controls['description'].invalid && (CourseForm.controls['description'].dirty || CourseForm.controls['description'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="CourseForm.controls['description'].errors?.['required']"><em class="fa-solid fa-circle-exclamation me-2"></em>Please add Description of the Course
+                        </div>
+                        <div *ngIf="CourseForm.controls['description'].errors?.['maxlength']">description should be under 150 words 
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="maincategory"
+                        (change)="firstFilter(categoryid)">
+                        <option selected>Select Category</option>
+                        <option *ngFor="let category of courseCategory" value="{{ category.categoryId }}">
+                            {{ category.categoryName }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Category</label>
+                    <div *ngIf="CourseForm.controls['maincategory'].invalid && (CourseForm.controls['maincategory'].dirty || CourseForm.controls['maincategory'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="CourseForm.controls['maincategory'].errors?.['required']"><em class="fa-solid fa-circle-exclamation me-2"></em>Please select Category</div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="subcategory"
+                        (change)="secondFilter(subcategoryid)">
+                        <option selected>Select Category</option>
+                        <option *ngFor="let category of FilterCategories" value="{{ category.categoryId }}">
+                            {{ category.categoryName }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Category</label>
+                    <div *ngIf="CourseForm.controls['subcategory'].invalid && (CourseForm.controls['subcategory'].dirty || CourseForm.controls['subcategory'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="CourseForm.controls['subcategory'].errors?.['required']"><em class="fa-solid fa-circle-exclamation me-2"></em>Please Select Subcategory
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="categoryId">
+                        <option selected>Select Category</option>
+                        <option *ngFor="let category of SubCategoryfilter" value="{{ category.categoryId }}">
+                            {{ category.categoryName }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Category</label>
+                    <div *ngIf="CourseForm.controls['categoryId'].invalid && (CourseForm.controls['categoryId'].dirty || CourseForm.controls['categoryId'].touched)"
+                    class="text-danger small">
+                    <div *ngIf="CourseForm.controls['categoryId'].errors?.['required']"><em class="fa-solid fa-circle-exclamation me-2"></em>Please Select leaf category
+                    </div>
+                </div>
+                </div>
+
+                <div class="d-grid my-2">
+                    <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" type="button" (click)="Add()">
+                        Add Course
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-6 col-lg-4 mt-1">
+            <h6 class="my-3">Add User</h6>
+            <form [formGroup]="userForm">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        placeholder="Course Title" formControlName="name" />
+                    <label for="floatingInput">Name</label>
+                    <div *ngIf="userForm.controls['name'].invalid && (userForm.controls['name'].dirty || userForm.controls['name'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="userForm.controls['name'].errors?.['required']">pls enter name
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        placeholder="Email" formControlName="email" />
+                    <label for="floatingInput">Email</label>
+                    <div *ngIf="userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="userForm.controls['email'].errors?.['required']">Email is required</div>
+                        <div *ngIf="userForm.controls['email'].errors?.['email']">Invalid email format</div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="tel" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        placeholder="Phone No" formControlName="phonNo" />
+                    <label for="floatingInput">Phone No</label>
+                    <div class="d-flex flex-column " *ngIf="userForm.get('phonNo')?.invalid && userForm.get('phonNo')?.touched">
+                        <small class="text-danger" *ngIf="userForm.get('phonNo')?.errors?.['required']">
+                          Phone number is required.
+                        </small>
+                        <small class="text-danger" *ngIf="userForm.get('phonNo')?.errors?.['pattern']">
+                          Please enter a valid phone number (only numbers allowed).
+                        </small>
+                        <small class="text-danger" *ngIf="userForm.get('phonNo')?.errors?.['minlength']||userForm.get('phonNo')?.errors?.['maxlength']">
+                          Please enter a valid phone number (length should be 10 digits).
+                        </small>
+                      </div>
+                </div>
+                <div class="d-grid my-2">
+                    <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" type="button" (click)="Add()">
+                        Add User
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

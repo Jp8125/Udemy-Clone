@@ -1,0 +1,139 @@
+<nav class="navbar navbar-expand navbar-white border border-2 bg-faded">
+  <div class="container-fluid">
+    <button class="navbar-toggler border-0 d-lg-none d-block me-4" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+      <em class="fa-solid fa-bars"></em>
+    </button>
+
+    <a class="navbar-brand mx-lg-0 mx-md-auto mx-sm-auto" routerLink="/"><img class="logo"
+        src="https://res.cloudinary.com/dysfwbod4/image/upload/v1686201594/Udemy/logo-udemy_izl5cy.svg"
+        alt="logo of udemy" />
+    </a>
+    <ul class=" navbar-nav me-auto   my-lg-1">
+      <li class="nav-item dropdown d-none d-lg-block">
+        <a class="nav-link " id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Categories
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li class="dropdown dropstart postion-relative px-5" *ngFor="let item of categories">
+            <a class="dropdown-item" [routerLink]="['/courses',item.categoryName]">{{item.categoryName}}</a>
+            <ul class="dropdown-menu position-absolute start-100 top-0" aria-labelledby="navbarDropdown">
+              <li class="dropdown dropstart postion-relative px-5" *ngFor="let subcourse of item.subCourses">
+                <a class="dropdown-item" [routerLink]="['/courses',subcourse.categoryName]">{{subcourse.categoryName}}</a>
+                <ul class="dropdown-menu position-absolute start-100 top-0" aria-labelledby="navbarScrollingDropdown">
+                  <li class="px-5" *ngFor="let nested of subcourse.subCourses"><a class="dropdown-item" [routerLink]="['/courses',nested.categoryName]"
+                      >{{nested.categoryName}}</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <form class="my-auto w-50  d-none d-lg-block">
+      <div class="input-group position-relative ">
+        <div class="input-group-prepend border border-start rounded-start-5">
+          <em class="fa-solid fa-magnifying-glass p-2 bg-white mt-1 d-none d-lg-block rounded-start-5 align-self-center "></em>
+        </div>
+          <input type="text" class="form-control dropdown-toggle border border-start-0  rounded-end-5 position-relative"  
+         placeholder="Search..." [(ngModel)]="keyword" (input)="filterCategory()" (blur)="removelist()" (focus)="display=true" name="filtername">
+          <div class="px-5 list-group minlist position-absolute top-100 z-1 "  *ngIf="display">
+              <a [routerLink]="['/courses',item.categoryName]" *ngFor="let item of filter" class="list-group-item list-group-item-action  py-3 max-w " aria-current="true">
+                {{item.categoryName}}
+              </a>
+          </div>
+      </div>
+  </form>
+  <div class="d-lg-none">
+    <em class="fa-solid fa-magnifying-glass p-2 bg-white mt-1 rounded-5" data-bs-toggle="offcanvas" data-bs-target="#search" aria-controls="search"></em>
+  </div> 
+    <div class="d-flex my-2 my-lg-0">
+      <ul class="navbar-nav mt-2 mt-lg-0 hstack gap-lg-0  gap-xl-1">
+        <li class="nav-item d-none d-xl-block">
+          <a class="nav-link text-small" href="https://business.udemy.com/request-demo-in-mx/?locale=en_US&mx_pg=httpcachecontextsme-list&ref=logged-in-nav&user_type=mx&utm_type=mx" target="_blank" >Udemy Business</a>
+        </li>
+        <li class="nav-item d-none d-xl-block">
+          <a class="nav-link text-small" href="https://www.udemy.com/teaching/?ref=teach_header" target="_blank">Teach on Udemy</a>
+        </li>
+        <li>
+          <a routerLink="/" class="nav-link">
+            <em class="fa fa-shopping-cart" aria-hidden="true"></em>
+          </a>
+        </li>
+        <li class="nav-item d-none d-lg-block">
+          <button type="button" class="btn btn-outline-dark" routerLink="./login">Login</button>
+        </li>
+        <li class="nav-item d-none d-lg-block">
+          <button type="button" class="btn btn-dark" routerLink="./signup">Sign up</button>
+        </li>
+ 
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="search" aria-labelledby="searchLabel">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body offcanvas-full">
+    <input type="text" class="form-control"  
+    placeholder="Search..." [(ngModel)]="keyword" (input)="filterCategory()" (blur)="removelist()" (focus)="display=true" name="filtername">
+     <div class="list-group"  *ngIf="display">
+         <a [routerLink]="['/courses',item.categoryName]" *ngFor="let item of filter"  class="list-group-item list-group-item-action  py-3" aria-current="true">
+           {{item.categoryName}}
+         </a>
+     </div>
+  </div>
+</div>
+<!-- offcanvas for navbar -->
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header">
+    <div class="d-flex flex-column ">
+      <a class="text-decoration-none text-purple fs-6" routerLink="./login">Log in</a>
+      <a class="text-decoration-none text-purple fs-6 mt-2" routerLink="./signup">Sign up</a>
+    </div>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <hr>
+  <div class="offcanvas-body">
+    <div class="d-flex flex-column">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div  *ngFor="let item of categories;let i=index">
+          <ul class="list-group list-group-flush" *ngFor="let item of item.subCourses;let i=index">
+              <li class="list-group-item">
+                <div class="accordion accordion-flush" id="accordionFlush">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#flush-subCategory'+item.categoryName.slice(2,4)" aria-expanded="false"
+                        [attr.aria-controls]="'flush-subCategory'+item.categoryName.slice(2,4)">
+                        {{ item.categoryName }}
+                      </button>
+                    </h2>
+                    <div [id]="'flush-subCategory'+item.categoryName.slice(2,4)" class="accordion-collapse collapse"
+                      aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlush">
+                      <div class="accordion-body">
+                        <div class="list-group" *ngFor="let secondSubCategory of item.subCourses">
+                          <a [routerLink]="['/courses',secondSubCategory.categoryName]" class="list-group-item list-group-item-action border-0 border-bottom " aria-current="true">
+                            {{ secondSubCategory.categoryName }}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="d-flex flex-column ">
+      <small class="mb-3 fw-bold text-muted">More from Udemy</small>
+      <a class="text-decoration-none text-dark"  href="https://business.udemy.com/request-demo-in-mx/?locale=en_US&mx_pg=httpcachecontextsme-list&ref=logged-in-nav&user_type=mx&utm_type=mx" target="_blank">Udemy Business</a>
+      <a class="text-decoration-none text-dark mt-2" href="https://www.udemy.com/teaching/?ref=teach_header" target="_blank">Teach on Udemy</a>
+      <a class="text-decoration-none text-dark mt-2" href="https://support.udemy.com/hc/en-us" target="_blank">Help</a>
+    </div>
+  </div>
+</div>

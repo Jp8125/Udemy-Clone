@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="d-flex my-2 justify-content-center" *ngIf="tost">
+
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4 mt-1">
+        <div class="alert alert-danger " role="alert" *ngIf="tost">
+          {{tost}}
+        </div>
+        <div class="alert alert-danger " role="alert" *ngIf="loginForm.invalid && formSubmitted">
+          Please make sure to fill correct details before sumitting form.
+        </div>
+        <div class="alert alert-success" role="alert" *ngIf="success">
+         {{success}}
+        </div>
+        <h6 class="mt-5">Log in to your Udemy account</h6>
+        <form [formGroup]="loginForm" (ngSubmit)="SentOtp()">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control rounded-0 border border-dark" id="floatingInput"
+              placeholder="name@example.com" formControlName="email" />
+            <label for="floatingInput">Email address</label>
+            <!-- Display email validation error message -->
+            <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)"
+              class="text-danger small">
+              <div *ngIf="loginForm.controls['email'].errors?.['required']">Email is required</div>
+              <div *ngIf="loginForm.controls['email'].errors?.['email']">Invalid email format</div>
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control rounded-0 border border-dark" id="floatingPassword"
+              placeholder="Password" formControlName="Password" />
+            <label for="floatingPassword">Password</label>
+            <!-- Display password validation error message -->
+            <div *ngIf="loginForm.controls['Password'].invalid && (loginForm.controls['Password'].dirty || loginForm.controls['Password'].touched)"
+              class="text-danger small">
+              <div *ngIf="loginForm.controls['Password'].errors?.['required']">Password is required</div>
+            </div>
+          </div>
+          <div class="d-grid my-2">
+            <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" type="submit" >
+              Log in
+            </button>
+          </div>
+        </form>
+        <div class="text-center">
+          <small class="mt-2">Or<a class="fw-bold text-purple" routerLink="/forgot">Forgot Password</a></small>
+        </div>
+        <hr />
+        <div class="text-center">
+          <small>Don't have an account?
+            <a class="fw-bold text-purple" routerLink="/signup">Sign up</a></small>
+        </div>
+      </div>
+    </div>
+  </div>
+  

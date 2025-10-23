@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-md-6 col-lg-4 mt-1">
+            <h6 class="mt-5">Add Category</h6>
+            <form [formGroup]="category">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        formControlName="categoryName" placeholder="Category Name" />
+                    <label for="floatingInput">Category Name</label>
+                    <div *ngIf="category.controls['categoryName'].invalid && (category.controls['categoryName'].dirty || category.controls['categoryName'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="category.controls['categoryName'].errors?.['required']">pls enter name
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark " id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="parentCategoryId">
+                        <option selected>Select Category</option>
+                        <option  [value]="null">
+                            No Parent Category
+                        </option>   
+                        <option *ngFor="let category of categoryArray" [value]="category.categoryId">{{category.categoryName}}</option>
+                    </select>
+                    <label for="floatingSelect">Parent Category</label>
+                    <div *ngIf="category.controls['parentCategoryId'].invalid && (category.controls['parentCategoryId'].dirty || category.controls['parentCategoryId'].touched)"
+                    class="text-danger small">
+                    <div *ngIf="category.controls['parentCategoryId'].errors?.['required']">Select Subtopic
+                    </div>
+                    <div *ngIf="category.controls['parentCategoryId'].errors?.['required']">If category is main Category select No parent category
+                    </div>
+                </div>
+                </div>
+                <div class="d-grid my-2">
+                    <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" 
+                        type="button" (click)="Add()">Add Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="container-fluid py-2">
+    <h1 class="text-secondary mb-5">Dashboard</h1>
+    <div class="container mt-4 d-flex flex-wrap  justify-content-between ">
+        <div class="card bg-info-subtle  border-bottom-0 border-top-0 border-end-0 border-5 border-info rounded-0 shadow  c-width" routerLink="Users">
+            <div class="card-body">
+                <div class="d-flex  justify-content-around align-items-center">
+                    <h4 class="card-title text-info">Users</h4>
+                    <em class="fa fa-user text-info" aria-hidden="true"></em>
+
+                </div>
+                <p class="card-text text-center mt-3 fw-bold text-info">{{totalUsers|async}}</p>
+            </div>
+        </div>
+        <div class="card bg-pm-low  border-bottom-0 border-top-0 border-end-0 border-5 border-primary rounded-0 shadow  c-width" routerLink="Courses">
+            <div class="card-body">
+                <div class="d-flex  justify-content-around align-items-center">
+                    <h4 class="card-title text-primary">Courses</h4>
+                    <i class="fa fa-book text-primary" aria-hidden="true"></i>
+                </div>
+                <p class="card-text text-center mt-3 fw-bold text-primary">{{Courses|async}}</p>
+            </div>
+        </div>
+        <div class="card bg-success-subtle   border-bottom-0 border-top-0 border-end-0 border-5 border-success  rounded-0 shadow  c-width" routerLink="Earnings">
+            <div class="card-body">
+                <div class="d-flex  justify-content-around align-items-center">
+                    <h4 class="card-title text-success ">Earning</h4>
+                    <em class="fa fa-inr text-success" aria-hidden="true"></em>
+                </div>
+                <p class="card-text text-center mt-3 fw-bold text-success">{{totalEarnings|currency:"INR"}}</p>
+            </div>
+        </div>
+    </div>
+   <div class="container mt-5">
+    <router-outlet></router-outlet>
+   </div>
+</div>

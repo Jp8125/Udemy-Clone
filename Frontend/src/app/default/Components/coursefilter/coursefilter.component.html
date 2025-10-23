@@ -1,0 +1,259 @@
+<ng-container *ngIf="Filteredcourses.length!=0;else showMain">
+<div class="container-fluid px-0">
+  <div class="container my-5">
+    <h2>{{FilterName}} Courses</h2>
+  </div>
+  <div class="container-md">
+    <h4>Courses to get you started</h4>
+    <div class="container-md mt-4 d-none d-md-block">
+      <ul class="nav nav-pills fw-bold mb-0" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-0 active" id="pills-py-tab" data-bs-toggle="pill" data-bs-target="#pills-py"
+            type="button" role="tab" aria-controls="pills-py" aria-selected="true">
+            Most popular
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-0" id="pills-excel-tab" data-bs-toggle="pill" data-bs-target="#pills-excel"
+            type="button" role="tab" aria-controls="pills-excel" aria-selected="false">
+            New
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link rounded-0" id="pills-wd-tab" data-bs-toggle="pill" data-bs-target="#pills-wd"
+            type="button" role="tab" aria-controls="pills-wd" aria-selected="false">
+            Trending
+          </button>
+        </li>
+      </ul>
+      <hr class="hrm">
+      <div class="tab-content  p-4" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-py" role="tabpanel" aria-labelledby="pills-py-tab"
+          tabindex="0">
+          <app-dynamic-carousel [courses]="popularCourses" routename="{{route}}" name="popular"></app-dynamic-carousel>
+        </div>
+        <div class="tab-pane fade" id="pills-excel" role="tabpanel" aria-labelledby="pills-excel-tab" tabindex="0">
+          <app-dynamic-carousel [courses]="newCourses" routename="{{route}}" name="new"></app-dynamic-carousel>
+        </div>
+        <div class="tab-pane fade" id="pills-wd" role="tabpanel" aria-labelledby="pills-wd-tab" tabindex="0">
+          <app-dynamic-carousel [courses]="Filteredcourses" routename="{{route}}"
+            name="trending"></app-dynamic-carousel>
+        </div>
+      </div>
+    </div>
+    <div class="container d-md-none my-5 ">
+      <div class="accordion border-bottom accordion-flush" id="popularExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button " type="button" data-bs-toggle="collapse"
+              data-bs-target="#popularAccordian" aria-expanded="true" aria-controls="popularAccordian">
+              <h4 class="fw-bold">Most popular</h4>
+            </button>
+          </h2>
+          <div id="popularAccordian" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+            data-bs-parent="#popularExample">
+            <div class="accordion-body">
+              <app-dynamic-carousel [courses]="popularCourses" routename="{{route}}"
+                name="accordianpopular"></app-dynamic-carousel>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="accordion border-bottom accordion-flush" id="newCourses">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button " type="button" data-bs-toggle="collapse"
+              data-bs-target="#newCourseAccordian" aria-expanded="true" aria-controls="newCourseAccordian">
+              <h4 class="fw-bold">New</h4>
+            </button>
+          </h2>
+          <div id="newCourseAccordian" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+            data-bs-parent="#newCourses">
+            <div class="accordion-body">
+              <app-dynamic-carousel [courses]="newCourses" routename="{{route}}"
+                name="accordiannew"></app-dynamic-carousel>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="accordion border-bottom accordion-flush" id="trendingExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button " type="button" data-bs-toggle="collapse"
+              data-bs-target="#trendingAccordian" aria-expanded="true" aria-controls="trendingAccordian">
+              <h4 class="fw-bold">Trending</h4>
+            </button>
+          </h2>
+          <div id="trendingAccordian" class="accordion-collapse collapse show" aria-labelledby="flush-headingOne"
+            data-bs-parent="#trendingExample">
+            <div class="accordion-body">
+              <app-dynamic-carousel [courses]="Filteredcourses" routename="{{route}}"
+                name="accordianTrending"></app-dynamic-carousel>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="container-md my-5">
+    <h4>Featured {{FilterName}} Courses</h4>
+    <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item border border-2 p-1 p-md-3" *ngFor="let item of Filteredcourses;let i=index"
+          [ngClass]="{'active': i==0}">
+          <div class="card mb-3 rounded-0 border-0 p-3">
+            <a class="text-decoration-none text-dark" [routerLink]="[route,item.name]">
+              <div class="row gx-4">
+                <div class="col-md-4 d-flex justify-content-center">
+                  <img src="{{item.thumbnailSrc}}" class="img-fluid" style="max-height: 14rem; min-height: 14rem;"
+                    alt="{{item.name}} image">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body p-0">
+                    <h4 class="card-title fw-bold">{{item.name}} </h4>
+                    <p class="card-text d-none d-md-block">{{item.description}}</p>
+                    <p class="card-text fw-bold"><small class="text-muted">{{ item.price | currency : "INR" }}</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <div class="container-md mt-5 ">
+    <h4>Filtered Courses</h4>
+    <div class="row">
+      <div class="col-lg-4 d-none d-lg-block ">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                Duration
+              </button>
+            </h2>
+            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="short" (change)="filter()"  id="price">
+                <label class="form-check-label" for="price">
+                  0-4 hours
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="sm" (change)="filter()"  id="price">
+                <label class="form-check-label" for="price">
+                  4-10 hours 
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="medium" (change)="filter()"  id="price">
+                <label class="form-check-label" for="price">
+                  10-16 hours 
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="long" (change)="filter()" id="price">
+                <label class="form-check-label" for="price">
+                  16+ hours 
+                </label>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                SubCategory
+              </button>
+            </h2>
+            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <div class="form-check" *ngFor="let item of filteredCategory">
+                  <input class="form-check-input" type="checkbox"  (change)="filterId(item.categoryId)" id="price">
+                  <label class="form-check-label" for="price">
+                    {{item.categoryName}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                Price
+              </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="free" (change)="filter()"  id="price">
+                  <label class="form-check-label" for="price">
+                    Free 
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" [(ngModel)]="paid" (change)="filter()" id="price">
+                  <label class="form-check-label" for="price">
+                    paid 
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12  col-lg-8 ">
+        <ng-container *ngIf="paramFilter.length!=0;else show">
+          <ng-container *ngFor="let item of paramFilter|paginate:{itemsPerPage:3,currentPage:page};let i=index">
+            <div class="card mb-4 rounded-0 border-0 shadow-sm p-3">
+              <a class="text-decoration-none text-dark" [routerLink]="[route,item.name]">
+                <div class="row gx-4">
+                  <div class="col-md-4">
+                    <img src="{{item.thumbnailSrc}}" class="img-thumbnail border-0 " style="max-height: 12rem; min-height: 12rem;"
+                      alt="{{item.name}} image">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body p-0">
+                      <h4 class="card-title fw-bold">{{item.name}} </h4>
+                      <p class="card-text d-none d-md-block overflow-y-auto" style="height: 10em;">{{item.description}}</p>
+                      <p class="card-text fw-bold"><small class="text-muted">{{ item.price | currency : "INR" }}</small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </ng-container>
+          <pagination-controls class="pagination" (pageChange)="page=$event"></pagination-controls>
+        </ng-container>
+        <ng-template #show >
+          <div class="d-flex  justify-content-center">
+            <img class="size" src="https://res.cloudinary.com/dysfwbod4/image/upload/v1691752441/Udemy/empty-box_1_nbtovg.png" alt="">
+          </div>
+          <h4 class="text-center">Data not Found</h4>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-container>
+<ng-template #showMain>
+  <div class="d-flex  justify-content-center ">
+    <img class="img-fluid w-50 h-50" src="https://res.cloudinary.com/dysfwbod4/image/upload/v1691753691/Udemy/NoCoursesAvailable_n1xvn9.jpg" alt="">
+  </div>
+  <h5 class="text-center ">Sorry No Courses Available For this Moment</h5>
+</ng-template>

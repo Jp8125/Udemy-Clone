@@ -1,0 +1,10 @@
+.m-heigth{
+max-height: 10em;
+overflow-y: hidden;
+}
+@media (max-width:48em) {
+    .m-heigth{
+        max-height: 10em;
+        overflow-y: scroll;
+    }
+}

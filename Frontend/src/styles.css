@@ -1,0 +1,54 @@
+/* You can add global styles to this file, and also import other style files */
+.btn-purple{
+    background-color: #A435F0;
+    color: white;
+}
+.text-purple{
+    color:  #A435F0;;
+    }
+    .btn-purple:hover{
+        background-color: #A435F0;
+        color: white;
+    }
+    .btn-purple:disabled{
+        background-color: #b68dd1;
+        color: white;
+    }
+    .text-purple:hover{
+        color:  #A435F0;
+        }
+.card-img-top {
+    height: 10rem;
+}
+.logo{
+    height: 1.5em;
+    width: 4em;
+}
+.custom-pointer {
+    cursor: pointer;
+  }
+.form-control:focus{
+    box-shadow: none !important;
+}
+.max-w{
+    width:24em !important;
+    }
+    @media (min-width: 1200px) {
+        .max-w{
+            width:34em !important;
+        }
+    }
+    @media (min-width: 1440px) {
+        .max-w{
+            width:35em !important;
+        }
+      }
+      .hide-scroll::-webkit-scrollbar {
+        display: none;
+      }
+      
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .hide-scroll {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }

@@ -1,0 +1,21 @@
+    <div class="jumbotron jumbotron-fluid bg-dark text-white py-5">
+        <div class="container">
+          <h1 class="display-4">{{user.name}}</h1>
+        </div>
+      </div>
+      <div class="container mt-4 d-flex justify-content-md-start   justify-content-center">
+        <ng-container *ngIf="user.profileUrl==null;else tempImg">
+          <div  class="img bg-dark rounded-circle"> 
+            
+          </div>
+        </ng-container>
+          <ng-template #tempImg>
+        <img class="rounded-circle img" [src]="user.profileUrl" alt="user profile">
+      </ng-template>
+      <div class="card ms-5 cw">
+        <div class="card-body rounded-0">
+          <p class="card-title">Email:</p>
+          <p>{{user.email}}</p>
+        </div>
+      </div>
+      </div>

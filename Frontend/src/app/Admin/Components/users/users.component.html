@@ -1,0 +1,49 @@
+<div class="contaner">
+  <h3 class="bg-info  text-white text-center my-2">Users</h3>
+  <div class="row  my-4">
+    <div class="input-group">
+      <div class="form-outline">
+        <input type="search" id="form1" class="form-control" [(ngModel)]="keyword" />
+      </div>
+      <div class="btn btn-info">
+        <em class="fas fa-search"></em>
+      </div>
+    </div>
+  </div>
+  <div class="hide-scroll" style="min-width: 26.5;overflow-x: scroll;">
+    <table class="table align-middle mb-0 bg-white" aria-labelledby="user details">  
+      <thead class="bg-light">
+        <tr>
+          <th>#</th>
+          <th>Profile</th>
+          <th>Name</th>
+          <th>phon No</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let item of ((users|async)??[])|userSearching:keyword|paginate:{itemsPerPage:5,currentPage:p};let i=index">
+          <td>{{i+1}}</td>
+          <td>
+            <div class="d-flex align-items-center">
+              <img src="https://res.cloudinary.com/dysfwbod4/image/upload/v1691515141/Udemy/user_cv27mb.png" style="width: 5em; height: 4em" class="rounded-2 " [ngClass]="{'d-none':item.profileUrl }" alt="">
+              <img [src]="item.profileUrl" [ngClass]="{'d-none': !item.profileUrl}" alt="image" style="width: 5em; height: 4em" class="rounded-2 " />
+            </div>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{item.name}}</p>
+          </td>
+          <td>
+            {{item.phonNo}}
+          </td>
+          <td>{{item.email}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex  justify-content-center ">
+    <pagination-controls class="pagination" (pageChange)="p=$event"></pagination-controls>
+  </div>
+</div>

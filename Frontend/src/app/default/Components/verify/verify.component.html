@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-md-6 col-lg-4 mt-1">
+            <h6 class="mt-5">Verify your Udemy account</h6>
+            <form>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-0 border border-dark" name="otp" id="floatingInput" [(ngModel)]="Otp"
+                     #otp="ngModel"  placeholder="OTP" required minlength="6" maxlength="6" [pattern]="regex"  />
+                    <label for="floatingInput">OTP</label>
+                    <div  *ngIf="otp.invalid && (otp.dirty||otp.touched)">
+                        <small class="text-danger my-1" *ngIf="otp.errors?.['required']">*enter otp</small>
+                        <small class="text-danger my-1" *ngIf="otp.errors?.['pattern']">*use only digits</small>
+                        <small class="text-danger my-1" *ngIf="otp.errors?.['minlength']">*length should be 6 digits</small>
+                    </div>
+                </div>           
+                <div class="d-grid my-2">
+                    <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" [disabled]="otp.invalid" (click)="Verify()" type="button">Verify</button>
+                </div>
+            </form> 
+        </div>
+    </div>
+</div>

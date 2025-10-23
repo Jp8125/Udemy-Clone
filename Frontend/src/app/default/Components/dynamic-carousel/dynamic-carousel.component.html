@@ -1,0 +1,90 @@
+<!-- sm -->
+<div  [id]="'dynamic1-'+name" class="carousel slide d-block d-sm-block d-md-none" data-bs-ride="carousel">
+    <div class="carousel-inner" >
+      <div class="carousel-item py-4"  *ngFor="let courseData of ArrayGroup(courses,1);let i=index"  [ngClass]="{'active' : i == 0}">
+        <div class="d-flex justify-content-center">
+            <div class="card border-0 rounded-0 mx-2 shadow" style="min-width: 16rem; max-width: 16rem; height:16rem" *ngFor="let course of courseData">
+                <img [src]="course.thumbnailSrc" class="card-img-top rounded-0" alt="Thumbnail" />
+                <div class="card-body">
+                    <a class="text-decoration-none" [routerLink]="[routename,course.name]">
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {{course.name}}
+                        </h6>
+                        <h6>{{ course.price | currency : "INR" }}</h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>          
+    <div class="d-flex justify-content-between" [ngClass]="{'d-none': courses.length<=1}">
+      <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#dynamic1-'+name" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-5 " aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#dynamic1-'+name" data-bs-slide="next">
+        <span class="carousel-control-next-icon  bg-dark rounded-5 " aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <!-- md -->
+  <div [id]="'dynamic2-'+name" class="carousel slide d-none d-md-block d-lg-none" data-bs-ride="carousel">
+    <div class="carousel-inner" >
+      <div class="carousel-item py-4"  *ngFor="let courseData of ArrayGroup(courses,2);let i=index"  [ngClass]="{'active' : i == 0}">
+        <div class="d-flex justify-content-center">
+            <div class="card border-0 rounded-0 mx-2 shadow" style="min-width: 16rem; max-width: 16rem; height:16rem" *ngFor="let course of courseData">
+                <img [src]="course.thumbnailSrc" class="card-img-top rounded-0" alt="Thumbnail" />
+                <div class="card-body">
+                    <a class="text-decoration-none" [routerLink]="[routename,course.name]">
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {{course.name}}
+                        </h6>
+                        <h6>{{ course.price | currency : "INR" }}</h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>          
+    <div class="d-flex justify-content-between" [ngClass]="{'d-none': courses.length<=2}">
+      <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#dynamic2-'+name" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-5" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#dynamic2-'+name" data-bs-slide="next">
+        <span class="carousel-control-next-icon  bg-dark rounded-5 " aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <!-- large -->
+  <div [id]="'dynamic3-'+name" class="carousel slide d-none d-lg-block " data-bs-ride="carousel">
+    <div class="carousel-inner" >
+      <div class="carousel-item py-4"  *ngFor="let courseData of ArrayGroup(courses,4);let i=index"  [ngClass]="{'active' : i == 0}">
+        <div class="d-flex justify-content-center">
+            <div class="card border-0 rounded-0 mx-2 shadow" style="min-width: 16rem; max-width: 16rem; height:16rem" *ngFor="let course of courseData">
+                <img [src]="course.thumbnailSrc" class="card-img-top rounded-0" alt="Thumbnail" />
+                <div class="card-body">
+                    <a class="text-decoration-none" [routerLink]="[routename,course.name]">
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {{course.name}}
+                        </h6>
+                        <h6>{{ course.price | currency : "INR" }}</h6>
+                    </a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>          
+    <div class="d-flex justify-content-between" [ngClass]="{'d-none': courses.length<=4}">
+      <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#dynamic3-'+name" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-5 " aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#dynamic3-'+name" data-bs-slide="next">
+        <span class="carousel-control-next-icon  bg-dark rounded-5 " aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>

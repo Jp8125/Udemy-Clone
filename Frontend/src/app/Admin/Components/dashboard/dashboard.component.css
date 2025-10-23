@@ -1,0 +1,13 @@
+.c-width{
+    width: 15em;
+    height: 8em;
+}
+.bg-pm-low{
+    background-color: rgba(0, 70, 221, 0.05);
+}
+.bg-in-low{
+    background-color: rgba(0, 188, 221, 0.05);
+}
+.bg-sc-low{
+    background-color: rgba(0, 221, 37, 0.05);
+}

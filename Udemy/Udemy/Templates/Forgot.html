@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .img {
+            width: 23em;
+            height: 20em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pera {
+            line-height: 2em;
+        }
+
+        .innerflex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .box {
+            width: 50em;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: large;
+            box-shadow: 10px 10px 10px 10px;
+        }
+
+        .warn {
+            background-color: rgb(241, 100, 100);
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+
+        .inner-box {
+            padding: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+        <img class="img"
+            src="https://res.cloudinary.com/dysfwbod4/image/upload/v1687159943/Udemy/udemy-new-20212512_brgeju.jpg"
+            alt="udemy logo">
+        <div>
+            <div class="inner-box">
+                <p class="pera">Dear customer,<br> use this One Time Password <span
+                        style="box-shadow: 100px; padding:.2em; background-color: #729ad6; color: whitesmoke;font-weight: bold;">
+                        ##otp##</span> to reset <span style="font-weight: bold;"><span
+                            style="color: purple;">U</span>demy</span> account Password. This OTP will be <span
+                        style="background-color: rgba(250, 204, 77, 0.87); padding: .4em; color: hsl(0, 96%, 9%); font-weight: bold;">valid
+                        for the next 3 mins.</span></p>
+                <hr>
+                <p class="warn">Do not Share this otp with anyone</p>
+                <div>
+                    Regards,<br>
+                    from <span style="font-weight: bold;"><span style="color: purple;">U</span>demy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

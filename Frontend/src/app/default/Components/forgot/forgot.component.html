@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 mt-1">
+            <h6 class="mt-5">Forgot Password</h6>
+            <form >
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        placeholder="name@example.com" required #errorEmail="ngModel" [pattern]="regex" name="email" [(ngModel)]="email" />
+                    <label for="floatingInput" >Email</label>
+                    <div  *ngIf="errorEmail.invalid && (errorEmail.dirty||errorEmail.touched)">
+                        <small class="text-danger my-1" *ngIf="errorEmail.errors?.['required']">Email required</small>
+                        <small class="text-danger my-1" *ngIf="errorEmail.errors?.['pattern']">Enter valid Email</small>
+                    </div>
+                </div>
+              
+                <div class="d-grid my-2">
+                    <button class="btn btn-purple rounded-0 py-3 text-white fw-bold"  type="button" [disabled]="errorEmail.invalid" (click)="Reset()">
+                       Reset Password
+                    </button>
+                </div>
+            </form>
+            <div class="text-center">
+                <small class="mt-2">Or<a class="fw-bold text-purple" routerLink="/login">
+                        Log in</a></small>
+            </div>
+        </div>
+    </div>
+</div>

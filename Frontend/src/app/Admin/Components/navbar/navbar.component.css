@@ -1,0 +1,11 @@
+.logo{
+    height: 1.5em;
+    width: 4em;
+}
+ .offcanvas{
+    width: 300px;
+  }
+  .navbar-nav a.active { 
+    background-color: #A435F0;
+    color: #ffffff; 
+}

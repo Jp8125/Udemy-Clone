@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 mt-1">
+            <h6 class="mt-5">Log in to your Udemy account</h6>
+            <form>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        placeholder="OTP"  name="otp" [(ngModel)]="otp" #Otp="ngModel" required minlength="6" maxlength="6" [pattern]="regex" />
+                    <label for="floatingInput">OTP</label>
+                    <div  *ngIf="Otp.invalid && (Otp.dirty||Otp.touched)">
+                        <small class="text-danger my-1" *ngIf="Otp.errors?.['required']">*enter otp</small>
+                        <small class="text-danger my-1" *ngIf="Otp.errors?.['pattern']">*use only digits</small>
+                        <small class="text-danger my-1" *ngIf="Otp.errors?.['minlength']">*length should be 6 digits</small>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control rounded-0 border border-dark" id="floatingPassword"
+                        placeholder="Password" [(ngModel)]="password" name="password" #Pw="ngModel" required minlength="6" maxlength="6" />
+                    <label for="floatingPassword">New Password</label>
+                    <div  *ngIf="Pw.invalid && (Pw.dirty||Pw.touched)">
+                        <small class="text-danger my-1" *ngIf="Pw.errors?.['required']">*enter Password</small>
+                        <small class="text-danger my-1" *ngIf="Pw.errors?.['minlength']||Pw.errors?.['maxlength']">*length should be 6 Characters</small>
+                    </div>
+                </div>
+                <div class="d-grid my-2">
+                    <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" [disabled]="Pw.invalid||Otp.invalid"  (click)="Update()" type="button">
+                        Reset Password
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

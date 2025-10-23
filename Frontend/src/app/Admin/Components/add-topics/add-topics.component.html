@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row justify-content-center ">
+        <div class="col-md-6 col-lg-4 mt-1">
+            <h6 class="mt-5">Add Topic</h6>
+            <form [formGroup]="topicForm">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        formControlName="title" placeholder="Title" />
+                    <label for="floatingInput">Title</label>
+                    <div *ngIf="topicForm.controls['title'].invalid && (topicForm.controls['title'].dirty || topicForm.controls['title'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="topicForm.controls['title'].errors?.['required']">title is required
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control rounded-0 border border-dark" placeholder="Leave a comment here"
+                        id="floatingTextarea2" style="height: 100px" formControlName="description"></textarea>
+                    <label for="floatingTextarea2">Description</label>
+                    <div *ngIf="topicForm.controls['description'].invalid && (topicForm.controls['description'].dirty || topicForm.controls['description'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="topicForm.controls['description'].errors?.['required']">description is required
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="courseId">
+                        <option selected>Select Course</option>
+                        <option *ngFor="let course of CourseArray" [value]="course.courseId">
+                            {{course.name}}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Course</label>
+                    <div *ngIf="topicForm.controls['courseId'].invalid && (topicForm.controls['courseId'].dirty || topicForm.controls['courseId'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="topicForm.controls['courseId'].errors?.['required']">Select Course
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid my-2">
+                    <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" type="button" (click)="Add()">Add
+                        Topic</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+/* learning-page.component.scss */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    box-shadow: 0 0 20px #A435F0;
+    transform: translateY(-5px) scale(1.05) rotate(2deg);
+  }
+  

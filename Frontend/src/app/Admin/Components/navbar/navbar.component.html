@@ -1,0 +1,85 @@
+<nav class="navbar navbar-expand navbar-white border border-2 bg-faded">
+  <div class="container-fluid ">
+    <button class="navbar-toggler border-0 d-lg-none d-block me-auto " type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+      <em class="fa-solid fa-bars"></em>
+    </button>
+
+    <a class="navbar-brand mx-lg-0 mx-auto " routerLink="/"><img class="logo"
+        src="https://res.cloudinary.com/dysfwbod4/image/upload/v1686201594/Udemy/logo-udemy_izl5cy.svg"
+        alt="logo of udemy" />
+    </a>
+    <ul class="navbar-nav ms-5 me-auto mt-2 my-lg-1">
+      <li class="nav-item  d-none d-lg-block">
+        <a  [routerLinkActive]="'active'" routerLink="dashboard" class="nav-link">
+          Dashboard
+        </a>
+      </li>
+      <li class="nav-item d-none d-xl-block">
+        <a class="nav-link"  [routerLinkActive]="'active'" routerLink="add-course">Add Course</a>
+      </li>
+      <li class="nav-item d-none d-xl-block">
+        <a class="nav-link"  [routerLinkActive]="'active'" routerLink="add-topic">Add Topic</a>
+      </li>
+      <li class="nav-item d-none d-lg-block">
+        <a  [routerLinkActive]="'active'" routerLink="add-subtopic" class="nav-link">
+          Add SubTopic
+        </a>
+      </li>
+      <li class="nav-item d-none d-lg-block">
+        <a  [routerLinkActive]="'active'" routerLink="add-user" class="nav-link">
+          Add User
+        </a>
+      </li>
+      <li class="nav-item d-none d-lg-block">
+        <a  [routerLinkActive]="'active'" routerLink="add-category" class="nav-link">
+          Add Category
+        </a>
+      </li>
+      <li class="nav-item d-none d-lg-block">
+        <a  [routerLinkActive]="'active'" routerLink="add-media" class="nav-link">
+          Add Media
+        </a>
+      </li>
+    </ul>
+    <div class="d-flex my-2 my-lg-0">
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0 hstack gap-2">
+        <li class="nav-item">
+          <button type="button" class="btn btn-purple" (click)="Logout()"><em class="fa-solid fa-right-from-bracket"></em></button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- offcanvas  -->
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header">
+    <div class="d-flex flex-column ">
+      <a routerLink="dashboard" class="nav-link">
+        Dashboard
+      </a>
+    </div>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <hr>
+  <div class="offcanvas-body">
+    <div class="d-flex flex-column ">
+      <a class="nav-link" routerLink="add-course">Add Course</a>
+      <a routerLink="add-user" class="nav-link">
+        Add User
+      </a>
+      <a class="nav-link" routerLink="add-topic">Add Topic</a>
+    </div>
+    <hr>
+    <div class="d-flex flex-column ">
+      <a routerLink="add-category" class="nav-link">
+        Add Category
+      </a>
+      <a routerLink="list" class="nav-link">
+        Courses
+      </a>
+    </div>
+  </div>
+</div>

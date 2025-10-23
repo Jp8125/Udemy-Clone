@@ -1,0 +1,191 @@
+<nav class="navbar navbar-expand navbar-white border border-2 bg-faded px-2 py-3">
+  <div class="container-fluid">
+    <button class="navbar-toggler border-0 d-lg-none d-block me-4" type="button" data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+      <em class="fa-solid fa-bars"></em>
+    </button>
+    <a class="navbar-brand mx-lg-0 mx-md-auto mx-sm-auto" routerLink="/"><img class="logo"
+        src="https://res.cloudinary.com/dysfwbod4/image/upload/v1686201594/Udemy/logo-udemy_izl5cy.svg"
+        alt="logo of udemy" />
+    </a>
+    <ul class="navbar-nav me-auto my-lg-1">
+      <li class="nav-item dropdown d-none d-lg-block">
+        <a class="nav-link" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Categories
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li class="dropdown dropstart postion-relative px-5" *ngFor="let item of categories">
+            <a class="dropdown-item" [routerLink]="['/Allcourses', item.categoryName]">{{ item.categoryName }}</a>
+            <ul class="dropdown-menu position-absolute start-100 top-0" aria-labelledby="navbarDropdown">
+              <li class="dropdown dropstart postion-relative px-5" *ngFor="let subcourse of item.subCourses">
+                <a class="dropdown-item" [routerLink]="['/Allcourses', subcourse.categoryName]">{{
+                  subcourse.categoryName }}</a>
+                <ul class="dropdown-menu position-absolute start-100 top-0" aria-labelledby="navbarScrollingDropdown">
+                  <li class="px-5" *ngFor="let nested of subcourse.subCourses">
+                    <a class="dropdown-item" [routerLink]="['/Allcourses', nested.categoryName]">{{ nested.categoryName}}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <form class="my-auto w-50  d-none d-lg-block">
+      <div class="input-group position-relative ">
+        <div class="input-group-prepend border border-start rounded-start-5">
+          <em class="fa-solid fa-magnifying-glass p-2 bg-white mt-1 d-none d-lg-block rounded-start-5 align-self-center "></em>
+        </div>
+          <input type="text" class="form-control dropdown-toggle border border-start-0  rounded-end-5 position-relative"  
+         placeholder="Search..." [(ngModel)]="keyword" (input)="filterCategory()" (blur)="removelist()" (focus)="display=true" name="filtername">
+          <ul class="px-5 list-group  position-absolute top-100 z-1" *ngIf="display">
+              <a [routerLink]="['/Allcourses',item.categoryName]" *ngFor="let item of filter" class="list-group-item list-group-item-action max-w py-3 " aria-current="true">
+                {{item.categoryName}}
+              </a>
+          </ul>
+      </div>
+  </form>
+    <div class="d-lg-none">
+      <em class="fa-solid fa-magnifying-glass p-2 bg-white mt-1 rounded-5" data-bs-toggle="offcanvas" data-bs-target="#search" aria-controls="search"></em>
+    </div>
+    <div class="d-flex my-2 my-lg-0">
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0 gap-lg-0 gap-xl-1">
+        <li class="nav-item d-none d-xl-block">
+          <a class="nav-link" routerLink="/mylearnings">My learning</a>
+        </li>
+        <li class="nav-item mx-lg-4">
+          <a routerLink="/cart" class="nav-link">
+            <em class="fa fa-shopping-cart position-relative p-2" aria-hidden="true">
+              <small class="position-absolute  top-0 start-100 translate-middle badge rounded-pill btn-purple" style="font-size: .6em;">
+                {{cartitems|async}}
+              </small>
+            </em>
+          </a>
+        </li>
+        <li class="nav-item position-relative dropdown d-none d-lg-block">
+          <a class="nav-link bg-dark text-white rounded-2" routerLink="#" id="dropdownId" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">{{ user.name }}</a>
+          <div class="dropdown-menu rounded-0 position-absolute top-50 end-50 mt-3" aria-labelledby="dropdownId">
+            <a class="dropdown-item px-5" routerLink="/profile">
+              <h4>{{ user.name }}</h4>
+              <small>{{ user.email }}</small>
+            </a>
+            <hr />
+            <a class="dropdown-item" routerLink="/mylearnings">My Learning</a>
+            <a class="dropdown-item" routerLink="/cart">My Cart</a>
+            <hr />
+            
+            <a class="dropdown-item" routerLink="/history">Purchase History</a>
+            <a class="dropdown-item" routerLink="/profile">Public Profile</a>
+            <a class="dropdown-item" routerLink="/edit">Edit Profile</a>
+            <hr />
+            <a class="dropdown-item" routerLink="#">Help</a>
+            <a class="dropdown-item custom-pointer" (click)="Logout()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="search" aria-labelledby="searchLabel">
+  <div class="offcanvas-header">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body offcanvas-full">
+    <input type="text" class="form-control"  
+    placeholder="Search..." [(ngModel)]="keyword" (input)="filterCategory()"  (focus)="display=true" name="filtername">
+     <div class="list-group"  *ngIf="display">
+         <a [routerLink]="['/Allcourses',item.categoryName]" *ngFor="let item of filter"  class="list-group-item list-group-item-action  py-3" aria-current="true">
+           {{item.categoryName}}
+         </a>
+     </div>
+  </div>
+</div>
+<!-- offcanvas  -->
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header">
+    <div class="d-flex flex-column">
+      <a class="text-dark text-decoration-none" data-bs-toggle="collapse" href="#profile" role="button"
+        aria-expanded="false" aria-controls="collapseExample">
+        <small class="fw-bold text-secondary">hi</small>,
+        <h4>{{ user.name }}</h4>
+        <small>{{ user.email }}</small>
+      </a>
+      <div class="collapse" id="profile">
+        <div class="card card-body border-0">
+          <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none fw-bold" routerLink="/mylearnings">My
+            Learning</a>
+          <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none fw-bold" routerLink="/cart">My
+            Cart</a>
+          <hr />
+          <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none fw-bold" routerLink="/history">Purchase
+            History</a>
+          <hr />
+          <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none fw-bold"
+            routerLink="/profile">Public Profile</a>
+          <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none fw-bold" routerLink="/edit">Edit
+            Profile</a>
+          <hr />
+          <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none fw-bold" routerLink="#">Help</a>
+          <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none fw-bold custom-pointer"
+            (click)="Logout()">Logout</a>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <hr />
+  <div class="offcanvas-body">
+    <div class="d-flex flex-column">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div *ngFor="let item of categories; let i = index">
+          <ul class="list-group list-group-flush" *ngFor="let item of item.subCourses; let i = index">
+            <li class="list-group-item">
+              <div class="accordion accordion-flush" id="accordionFlush">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="
+                        '#flush-subCategory' + item.categoryName.slice(2, 4)
+                      " aria-expanded="false" [attr.aria-controls]="
+                        'flush-subCategory' + item.categoryName.slice(2, 4)
+                      ">
+                      {{ item.categoryName }}
+                    </button>
+                  </h2>
+                  <div [id]="'flush-subCategory' + item.categoryName.slice(2, 4)" class="accordion-collapse collapse"
+                    aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlush">
+                    <div class="accordion-body">
+                      <div class="list-group" *ngFor="let secondSubCategory of item.subCourses">
+                        <a data-bs-dismiss="offcanvas" aria-label="Close" [routerLink]="[
+                            '/Allcourses',
+                            secondSubCategory.categoryName
+                          ]" class="list-group-item list-group-item-action border-0 border-bottom" aria-current="true">
+                          {{ secondSubCategory.categoryName }}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="d-flex flex-column">
+      <small class="mb-3 fw-bold text-muted">More from Udemy</small>
+      <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none text-dark" routerLink="#">Udemy
+        Business</a>
+      <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none text-dark mt-2" routerLink="#">Teach
+        on Udemy</a>
+      <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none text-dark mt-2"
+        routerLink="#">Invite friends</a>
+      <a data-bs-dismiss="offcanvas" aria-label="Close" class="text-decoration-none text-dark mt-2"
+        routerLink="#">Help</a>
+    </div>
+  </div>
+</div>

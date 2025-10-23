@@ -1,0 +1,66 @@
+<div class="container-fluid ">
+    <div class="p-5 mb-4 bg-info-subtle  rounded-3">
+        <div class="container-fluid py-5">
+          <h1 class="display-5 fw-bold">{{coursedata.name}}</h1>
+          <p class="col-md-8 fs-6  p-3">{{coursedata.description}}</p>
+        </div>
+      </div>
+      <div class="p-5 mb-4 bg-info-subtle  rounded-3 row">
+        <div class="accordion accordion-flush  col-md-6 my-3" id="accordionFlushExample"  *ngFor="let topic of coursedata.topics;let i=index">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        [attr.data-bs-target]="'#flush-'+i" aria-expanded="false" [attr.aria-controls]="'flush-'+i">
+                        {{ topic.title }}
+                    </button>
+                </h2>
+                <div [id]="'flush-'+i" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <ul *ngFor="let item of topic.subtopics">
+                            <li class="d-flex justify-content-between ">{{ item.title }}<button type="button" class="btn btn-primary" (click)="edit(item,topic.topicId)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                              Edit
+                            </button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+</div>
+<!-- modal 1 -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="subtopicForm">
+            <!-- Name input -->
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="floatingInput" formControlName="title">
+              <label for="floatingInput">Name</label>
+            </div>
+            <select class="form-select" aria-label="Default select example" formControlName="topics">
+              <option selected>Select Topic</option>
+              <option *ngFor="let topic of topics" value="{{ topic.topicId }}">
+                {{ topic.title }}
+            </option>
+            </select>
+            <!-- Message input -->
+            <div class="form-floating">
+              <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" formControlName="description" style="height: 100px"></textarea>
+              <label for="floatingTextarea2">Description</label>
+            </div>
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-warning  btn-block mb-4"  class="btn btn-secondary" data-bs-dismiss="modal" (click)="update()">Update</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

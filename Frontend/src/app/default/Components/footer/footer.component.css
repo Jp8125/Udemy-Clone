@@ -1,0 +1,12 @@
+.logo{
+    height: 3.7em;
+    width: 5em;
+    mix-blend-mode:difference;
+}
+.bg-dark{
+    background-color: #1c1d1f !important; 
+}
+a{
+    font-size: 0.9rem;
+    padding: 0em,0.2em,0.2em,0em;
+}

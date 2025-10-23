@@ -1,0 +1,84 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 mt-1">
+            <h6 class="mt-5">Add SubTopic</h6>
+            <form [formGroup]="subtopicForm">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control rounded-0 border border-dark" id="floatingInput"
+                        formControlName="title" placeholder="Title" />
+                    <label for="floatingInput">Title</label>
+                    <div *ngIf="subtopicForm.controls['title'].invalid && (subtopicForm.controls['title'].dirty || subtopicForm.controls['title'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="subtopicForm.controls['title'].errors?.['required']">title is required
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control rounded-0 border border-dark" placeholder="Leave a comment here"
+                        id="floatingTextarea2" style="height: 100px" formControlName="description"></textarea>
+                    <label for="floatingTextarea2">Description</label>
+                    <div *ngIf="subtopicForm.controls['description'].invalid && (subtopicForm.controls['description'].dirty || subtopicForm.controls['description'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="subtopicForm.controls['description'].errors?.['required']">description is required
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="course"
+                        (change)="Filtertopics(CourseId)">
+                        <option selected>Select Topic</option>
+                        <option class="py-5" *ngFor="let course of CourseArray" [value]="course.courseId">
+                            {{ course.name }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Course</label>
+                    <div *ngIf="subtopicForm.controls['course'].invalid && (subtopicForm.controls['course'].dirty || subtopicForm.controls['course'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="subtopicForm.controls['course'].errors?.['required']">Select Course
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="topics" (change)="Filter(Id)">
+                        <option selected>Select Topic</option>
+                        <option *ngFor="let topic of FilterTopics" [value]="topic.topicId">
+                            {{ topic.title }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Topic</label>
+                    <div *ngIf="subtopicForm.controls['topics'].invalid && (subtopicForm.controls['topics'].dirty || subtopicForm.controls['topics'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="subtopicForm.controls['topics'].errors?.['required']">Select topic
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="parentId">
+                        <option selected>Select SubTopic</option>
+                        <option value="null">-------</option>
+                        <option *ngFor="let subTopic of filterSubTopics" [value]="subTopic.subTopicId">
+                            {{ subTopic.title }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Subtopics</label>
+                    <div *ngIf="subtopicForm.controls['parentId'].invalid && (subtopicForm.controls['parentId'].dirty || subtopicForm.controls['parentId'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="subtopicForm.controls['parentId'].errors?.['required']">Select Subtopic
+                        </div>
+                        <div *ngIf="subtopicForm.controls['parentId'].errors?.['required']">if you don't need sub topic
+                            select -----
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid my-2">
+                    <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" type="button" (click)="Add()">
+                        Add SubTopic
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

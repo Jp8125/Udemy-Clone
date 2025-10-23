@@ -1,0 +1,56 @@
+<div class="container my-3">
+    <h1 class="fs-1 fw-bold d-none d-lg-block ">Shopping Cart</h1>
+    <small class="mt-4 fw-bold ">{{numberofCourses|async}} Courses in Cart</small>
+    <ng-container *ngIf="(numberofCourses|async)!=0;else empty">
+        <div class="row">
+            <div class="col-12  col-lg-8 col-xl-9 order-2  order-lg-1 ">
+                <div  *ngFor="let item of coursestobuy">
+                    <hr>
+                   <div class="row">
+                    <div class="col-4  col-sm-2 order-1 order-sm-1  ">
+                        <img class="img-thumbnail" style="min-width: 4em; min-height: 4em;" src="{{item.thumbnailSrc}}" alt="">
+                    </div>
+                    <div class="col-4  col-sm-5 order-2 order-sm-2 ">
+                        <p class="fw-bold small-text">{{item.name}}</p>
+                        <small class="text-secondary small-text me-2">{{item.duration}} total hours</small>
+                        <small class="text-secondary small-text d-block d-sm-inline  ">{{item.topics.length}} lectures</small>
+                    </div>
+                    <div class="col-12  col-sm-3 order-4 order-sm-3">
+                        <small class="text-purple small-text pointer" (click)="remove(item.courseId)">Remove</small>
+                    </div> 
+                    <div class="col-4 col-sm-2 order-3 order-sm-4 ">
+                        <p class="fw-bold text-purple small-text ms-4">{{item.price|currency:"INR":'symbol': (item.price % 2 == 0) ? '1.0-0': '1.2-2'}}<em class="ms-1 fa-solid fa-tag"></em></p>
+                    </div>
+                   </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 col-xl-3 order-1  order-lg-2 ">
+                <div class="card border-0 ms-lg-3 ">
+                    <div class="card-body p-0 p-lg-0 2">
+                        <h6 class="text-secondary fw-bold ">Total:</h6>
+                        <h2 class="fs-3 fw-bold  d-lg-block ">{{total|currency:"INR":'symbol': (total% 2 == 0) ? '1.0-0': '1.2-2'}}</h2>
+                        <button class="btn btn-purple w-100 px-5 mt-2  rounded-0 py-2 text-white fw-bold" type="button" (click)="navigate()">
+                            Checkout
+                        </button>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </ng-container>
+    <ng-template #empty>
+        <div>
+            <div class="d-flex justify-content-center  align-self-center ">
+                <img class="w-50 h-50"  src="https://udemy-project-bucket.s3.ap-south-1.amazonaws.com/Errors/cart.jpg" alt="image of empty cart">
+            </div>
+            <p class="text-center">Your cart is empty. Keep shopping to find a course!</p>
+            <div class="d-flex justify-content-center  align-self-center">
+                <button class="btn btn-purple  px-5 mt-2  rounded-0 py-2 text-white fw-bold" type="button" routerLink="/" >
+                    Keep Shoping
+                </button>
+            </div>
+        </div>
+    </ng-template>
+    <!-- <button class="btn btn-purple w-100 px-5 mt-2  rounded-0 py-2 text-white fw-bold d-lg-none d-block bottom-0 " type="button" >
+        Checkout
+    </button> -->
+</div>

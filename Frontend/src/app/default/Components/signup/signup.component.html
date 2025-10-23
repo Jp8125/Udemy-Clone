@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4 mt-1">
+        <h6 class="mt-5">Sign up and start learning</h6>
+        <div class="alert alert-danger " role="alert" *ngIf="signupForm.invalid && formSubmitted">
+            Please make sure to fill correct details before sumitting form.
+          </div>
+        <form [formGroup]="signupForm">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control rounded-0 border border-dark" id="floatingInput"
+              formControlName="name" placeholder="Full Name" />
+            <label for="floatingInput">Full Name</label>
+
+            <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">
+              <small class="text-danger">Name is required.</small>
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control rounded-0 border border-dark" id="floatingInput"
+              placeholder="name@example.com" formControlName="email" />
+            <label for="floatingInput">Email address</label>
+            <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+              <small class="text-danger" *ngIf="signupForm.get('email')?.errors?.['required']">
+                Email is required.
+              </small>
+              <small class="text-danger" *ngIf="signupForm.get('email')?.errors?.['email']">
+                Invalid email format.
+              </small>
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="tel" class="form-control rounded-0 border border-dark" id="floatingInput"
+              placeholder="Phone no" formControlName="phonNo" />
+            <label for="floatingInput">Phone no</label>
+
+            <div class="d-flex flex-column " *ngIf="signupForm.get('phonNo')?.invalid && signupForm.get('phonNo')?.touched">
+              <small class="text-danger" *ngIf="signupForm.get('phonNo')?.errors?.['required']">
+                Phone number is required.
+              </small>
+              <small class="text-danger" *ngIf="signupForm.get('phonNo')?.errors?.['pattern']">
+                Please enter a valid phone number (only numbers allowed).
+              </small>
+              <small class="text-danger" *ngIf="signupForm.get('phonNo')?.errors?.['minlength']||signupForm.get('phonNo')?.errors?.['maxlength']">
+                Please enter a valid phone number (length should be 10 digits).
+              </small>
+            </div>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control rounded-0 border border-dark" id="floatingPassword"
+              placeholder="Password" formControlName="password" />
+            <label for="floatingPassword">Password</label>
+            <div class="d-flex flex-column " *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+              <small class="text-danger" *ngIf="signupForm.get('password')?.errors?.['required']">
+                Password is required.
+              </small>
+              <small class="text-danger" *ngIf="signupForm.get('password')?.errors?.['minlength']">
+                Password must be at least 6 characters long.
+              </small>
+              <small class="text-danger" *ngIf="signupForm.get('password')?.errors?.['pattern']">
+                Password Should contain at least one special character one number and one capital letter.
+              </small>
+            </div>
+          </div>
+          <div class="d-grid my-2">
+            <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" (click)="Signup()" type="button">
+              Sign up
+            </button>
+          </div>
+        </form>
+        <small class="mt-2">By signing up, you agree to our Terms of Use and Privacy Policy</small>
+        <hr>
+        <div class="text-center">
+          <small>Already have an account? <a class="fw-bold text-purple" routerLink="/login">Login</a></small>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,35 @@
+<div class="container">
+    <h2 class="bg-success   text-white text-center">Earning Details</h2>
+    <div  class="hide-scroll" style="min-width: 26.5;overflow-x: scroll;">
+      <table class="table" aria-labelledby="earning table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">User Data</th>
+            <th scope="col">Course Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of earnings|async">
+            <th scope="row">{{item.purchaseId}}</th>
+            <td>
+                <ng-container>
+                    <p>Name: {{item.userdata.name}}</p>
+                    <p>Eamil: {{item.userdata.email}}</p>
+                </ng-container>
+            </td>
+            <td class="py-3 ">
+               <div class="overflow-y-scroll " style="height: 7em;">
+                <ng-container class="d-flex" *ngFor="let item of item.courses">
+                     <p>CourseId: {{item.courseId}}</p>
+                     <p>Name: {{item.name}}</p>
+                     <p>Price: {{item.price}}</p>
+                </ng-container>
+               </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>

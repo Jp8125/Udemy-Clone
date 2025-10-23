@@ -1,0 +1,60 @@
+<div class="container-md p-1 p-lg-5">
+    <h1>Profile Settings</h1>
+    <ul class="nav nav-pills fw-bold mt-5 mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home"
+                type="button" role="tab" aria-controls="pills-home" aria-selected="true">Udemy Profile</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"
+                type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile Picture</button>
+        </li>
+    </ul>
+    <hr>
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show container active" id="pills-home" role="tabpanel"
+            aria-labelledby="pills-home-tab">
+            <div class="row justify-content-center">
+                <form class="border border-0  col-12 col-lg-8 col-md-6" [formGroup]="editProfile">
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label fw-bold">FIrst Name</label>
+                        <input type="text" class="form-control border border-dark rounded-0 p-lg-3 p-md-2 p-sm-1 "
+                            id="firstname" aria-describedby="emailHelp" formControlName="firstName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label fw-bold">Last Name</label>
+                        <input type="text" class="form-control border border-dark rounded-0  p-lg-3 p-md-2 p-sm-1 "
+                            id="lastname" aria-describedby="emailHelp" formControlName="lastName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label fw-bold">Phone no</label>
+                        <input type="tel" class="form-control border border-dark rounded-0  p-lg-3 p-md-2 p-sm-1 "
+                            id="phone" aria-describedby="emailHelp" formControlName="phonNo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-bold">Email</label>
+                        <input type="email" class="form-control border border-dark rounded-0  p-lg-3 p-md-2 p-sm-1 "
+                            id="email" formControlName="email">
+                    </div>
+                    <button class="btn btn-dark px-4 py-2" (click)="EditProfile()">Edit</button>
+                </form>
+            </div>
+        </div>
+        <div class="tab-pane fade container" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+            <div class="mb-3 row">
+                <div class="mb-3 row justify-content-lg-start justify-content-center">
+                    <img [src]="imgSrc" class="col-12 col-lg-8 col-md-6 img-profile rounded-circle  border " alt="preview image">
+                </div>
+                <form form class="border border-0  col-12 col-lg-8 col-md-6">
+                  
+                    <input (change)="GetFile($event)" class="form-control form-control-lg rounded-0 border border-dark"
+                        id="formFileLg" type="file" [(ngModel)]="imgValue" required #img="ngModel" name="image" />
+                    <div class="my-4 " *ngIf="img.invalid && (img.dirty || img.touched)">
+                        <small class="alert alert-danger" *ngIf="img.errors?.['required']">pls upload a image</small>
+                    </div>
+                    <button class="btn btn-dark mt-3" (click)="UpdateImg()" [disabled]="imgSrc.length===0">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

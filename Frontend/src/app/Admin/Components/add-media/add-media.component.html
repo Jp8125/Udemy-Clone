@@ -1,0 +1,88 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4 mt-1">
+            <h6 class="mt-5">Add SubTopic</h6>
+            <form [formGroup]="mediaForm">
+                <div class="alert alert-warning" *ngIf="message" role="alert">
+                    {{message}}
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="course"
+                        (change)="Filtertopics(CourseId)">
+                        <option selected>Select Topic</option>
+                        <option class="py-5" *ngFor="let course of CourseArray" [value]="course.Id">
+                            {{ course.name }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Course</label>
+                    <div *ngIf="mediaForm.controls['course'].invalid && (mediaForm.controls['course'].dirty || mediaForm.controls['course'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="mediaForm.controls['course'].errors?.['required']">course is required
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="mediaType">
+                        <option selected>Select Type</option>
+                        <option class="py-5" *ngFor="let type of Types" [value]="type">
+                            {{ type }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Type</label>
+                    <div *ngIf="mediaForm.controls['mediaType'].invalid && (mediaForm.controls['mediaType'].dirty || mediaForm.controls['mediaType'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="mediaForm.controls['mediaType'].errors?.['required']">mediaType is required
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="topics" (change)="Filter(Id)">
+                        <option selected>Select Topic</option>
+                        <option *ngFor="let topic of FilterTopics" [value]="topic.topicId">
+                            {{ topic.title }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Topic</label>
+                    <div *ngIf="mediaForm.controls['topics'].invalid && (mediaForm.controls['topics'].dirty || mediaForm.controls['topics'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="mediaForm.controls['topics'].errors?.['required']">Select Topic
+                        </div>
+                    </div>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select rounded-0 border border-dark" id="floatingSelect"
+                        aria-label="Floating label select example" formControlName="topicId">
+                        <option selected>Select SubTopic</option>
+                        <option *ngFor="let subTopic of filterSubTopics" [value]="subTopic.subTopicId">
+                            {{ subTopic.title }}
+                        </option>
+                    </select>
+                    <label for="floatingSelect">Subtopics</label>
+                    <div *ngIf="mediaForm.controls['topicId'].invalid && (mediaForm.controls['topicId'].dirty || mediaForm.controls['topicId'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="mediaForm.controls['topicId'].errors?.['required']">Select Subtopic
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input (change)="GetFile($event)" class="form-control form-control-lg rounded-0 border border-dark"
+                        id="formFileLg" type="file" formControlName="mediaSrc" />
+                    <div *ngIf="mediaForm.controls['mediaSrc'].invalid && (mediaForm.controls['mediaSrc'].dirty || mediaForm.controls['mediaSrc'].touched)"
+                        class="text-danger small">
+                        <div *ngIf="mediaForm.controls['mediaSrc'].errors?.['required']">Choose file
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid my-2">
+                    <button class="btn btn-purple rounded-0 py-3 text-white fw-bold" type="button" (click)="Add()">
+                        Add Media
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

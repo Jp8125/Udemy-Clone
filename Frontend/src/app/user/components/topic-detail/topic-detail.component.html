@@ -1,0 +1,29 @@
+<div class="container p-3">
+    <h3 class="text-dark fw-bold">{{ topic.title }}</h3>
+    <div class="container mt-2 p-2 p-lg-5">
+        <ng-container *ngFor="let item of topic.subtopics">
+            <ul class="list-unstyled">
+                <li>
+                    <em class="fa fa-code me-3" aria-hidden="true"></em>{{ item.title }}
+                    <div class="list-group ms-5 mt-2">
+                        <div class="list-group-item list-group-item-action flex-column align-items-star">
+                            <p class="overflow-auto" style="height: 6em">
+                                {{ item.description }}
+                            </p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </ng-container>
+    </div>
+    <ng-container *ngIf="showBtn;else invalidProgress">
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-success fw-bold">Completed</button>
+        </div>
+    </ng-container>
+    <ng-template #invalidProgress>
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-primary" (click)="UpdateProgress()">Mark as complete</button>
+        </div>
+    </ng-template>
+</div>

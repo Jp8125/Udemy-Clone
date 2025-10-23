@@ -1,0 +1,114 @@
+<div class="contaner">
+  <h3 class="bg-primary  text-white text-center my-2">Courses</h3>
+  <div class="row my-4">
+    <div class="col-6">
+      <div class="input-group">
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" [(ngModel)]="keyword" />
+        </div>
+        <div  class="btn btn-primary">
+          <em class="fas fa-search"></em>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <select class="form-select" aria-label="Default select example" [(ngModel)]="sortmethod" >
+        <option selected>Short by</option>
+        <option value="1">Title</option>
+        <option value="2">Price</option>
+        <option value="3">Date</option>
+      </select>
+    </div>
+  </div>
+  <div class="hide-scroll" style="min-width: 26.5;overflow-x: scroll;">
+    <table class="table align-middle mb-0 bg-white" aria-labelledby="user details">
+      <thead class="bg-light">
+        <tr>
+          <th>Thumbnail</th>
+          <th>Title</th>
+          <th>Price</th>
+          <th>Duration</th>
+          <th>Created Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of ((Courses|async)??[])|filter:keyword|sort:sortmethod|paginate:{itemsPerPage:6,currentPage:page}">
+
+          <td>
+            <div class="d-flex align-items-center">
+              <img [src]="item.thumbnailSrc" alt="image" style="width: 5em; height: 4em" class="rounded-2 " />
+            </div>
+          </td>
+          <td>
+            <p class="fw-normal mb-1">{{item.name}}</p>
+          </td>
+          <td>
+            {{item.price|currency:"INR"}}
+          </td>
+          <td>{{item.duration}}</td>
+          <td>
+            <ng-container>
+              {{getDate(item.createdDate)}}
+            </ng-container>
+          </td>
+          <td>
+            <ng-container class="d-flex  justify-content-between ">
+              <button type="button" class="btn btn-primary" [routerLink]="['/admin-route/preview', item.name]">Preview</button>
+              <button type="button" class="btn btn-danger mx-2" (click)="onDelete(item.courseId)">Delete</button>
+              <button type="button" class="btn btn-primary" (click)="OnEdit(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Edit
+              </button>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="d-flex  justify-content-center ">
+    <pagination-controls class="pagination" (pageChange)="page=$event"></pagination-controls>
+  </div>
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="updateForm">
+          <!-- Name input -->
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" formControlName="name">
+            <label for="floatingInput">Name</label>
+          </div>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingPassword" formControlName="price">
+            <label for="floatingPassword">Price</label>
+          </div>
+          <select class="form-select" aria-label="Default select example" formControlName="categoryId">
+            <option selected>Select Category</option>
+            <option *ngFor="let category of categories" value="{{ category.categoryId }}">
+              {{ category.categoryName }}
+          </option>
+          </select>
+          <!-- Message input -->
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" formControlName="description" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Description</label>
+          </div>
+          <!-- Submit button -->
+          <button type="submit" class="btn btn-warning  btn-block mb-4"  class="btn btn-secondary" data-bs-dismiss="modal" (click)="onUpdate()">Update</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

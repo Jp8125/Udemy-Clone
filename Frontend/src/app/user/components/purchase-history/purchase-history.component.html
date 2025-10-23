@@ -1,0 +1,49 @@
+<div class="container-md">
+  
+  <div class="row justify-content-center my-4 shadow py-2" >
+    <div class="col-3 d-flex justify-content-start">
+      <h6 class="fw-bold text-start  align-self-center">
+        #
+      </h6>
+    </div>
+    <div class="col-3 d-flex justify-content-end">
+      <h6 class="fw-bold text-end align-self-center">
+        Course
+      </h6>
+    </div>
+    <div class="col-3 d-flex justify-content-end">
+      <p class="text-end align-self-center">
+        Purchase Date
+      </p>
+    </div>
+    <div class="col-3 d-flex justify-content-end">
+      <h6 class="fw-bold text-purple text-end align-self-center">
+        Price
+      </h6>
+    </div>
+    
+  </div>
+      <div class="row justify-content-center my-4 shadow py-2" *ngFor="let item of payments.courses|paginate:{itemsPerPage:6,currentPage:page}">
+        <div class="col-3 d-flex ">
+          <img class="img-thumbnail img-w align-self-center"  [src]="item.thumbnailSrc" alt="image">
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+          <h6 class="fw-bold text-end align-self-center">
+            {{item.name}}
+          </h6>
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+          <p class="text-end align-self-center">
+             {{datevalue(item.purchaseDate)}}
+          </p>
+        </div>
+        <div class="col-3 d-flex justify-content-end">
+          <h6 class="fw-bold text-purple text-end align-self-center">
+            {{item.price|currency:"INR"}}
+          </h6>
+        </div>
+      </div>
+      <div class="d-flex  justify-content-center ">
+        <pagination-controls class="pagination" (pageChange)="page=$event"></pagination-controls>
+      </div>
+</div>

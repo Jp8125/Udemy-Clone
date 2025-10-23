@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand navbar-white border border-2 bg-faded px-2 py-3">
+    <div class="container-fluid">
+      <a class="navbar-brand mx-lg-0 mx-md-auto mx-sm-auto" routerLink="/"><img class="logo"
+          src="https://res.cloudinary.com/dysfwbod4/image/upload/v1686201594/Udemy/logo-udemy_izl5cy.svg"
+          alt="logo of udemy" />
+      </a>
+      <div class="d-flex justify-content-end text-purple my-2 my-lg-0 custom-pointer" routerLink="/cart">
+        cancel
+      </div>
+    </div>
+  </nav>
+<div class="container-fluid row w-100 mx-auto justify-content-center">
+    <div class="container mt-2 mb-5"> 
+        <h3 class="fw-bold text-center">Checkout</h3>
+    </div>
+<div class="col-12 col-xl-7">
+   <div class="row justify-content-center justify-content-xl-end pt-2">
+    <div class="col-12 col-lg-10">
+        <h4 class="fw-bold  ms-0 ps-0 ms-md-5 ps-md-5 ms-xl-0 ps-xl-0">Order details</h4>
+        <div  class="mt-2" *ngFor="let item of coursestobuy">
+           <div class="row justify-content-center  justify-content-xl-start">
+            <div class="col-4  col-sm-2 order-1 order-sm-1  ">
+                <img class="img-thumbnail" style="min-width: 4em; min-height: 4em;" src="{{item.thumbnailSrc}}" alt="">
+            </div>
+            <div class="col-4  col-sm-5 order-2 order-sm-2 ">
+                <p class="fw-bold small-text">{{item.name}}</p>
+            </div> 
+            <div class="col-4 col-sm-2 order-3 order-sm-4 ">
+                <p class="fw-bold  small-text ms-4">{{item.price|currency:"INR":'symbol': (item.price % 2 == 0) ? '1.0-0': '1.2-2'}}</p>
+            </div>
+           </div>
+        </div>
+    </div>
+   </div>
+</div>
+<div class="col-12 col-lg-12 col-xl-5 bg-light min-vh-100 ">
+    <div class="row justify-content-center justify-content-xl-start pt-2">
+        <div class="card  col-12  col-md-9  border-0 ms-lg-3 bg-light">
+            <div class="card-body p-0 p-lg-0 2">
+                <h4 class="fw-bold">Summary</h4>
+               <div class="d-flex justify-content-between"><small>Original Price:</small><small>{{total|currency:"INR":'symbol': (total% 2 == 0) ? '1.0-0': '1.2-2'}}</small></div>
+               <hr class="my-2">
+               <small class="d-flex justify-content-between" *ngIf="total==0"><small>Additional tex:</small><small>{{2|currency:"INR":'symbol': (total% 2 == 0) ? '1.0-0': '1.2-2'}}</small></small>
+               <div class="d-flex justify-content-between mt-2">
+                <h6 class="fw-bold ">Total</h6>
+                 <h6 class="fw-bold" *ngIf="total!=0">{{total|currency:"INR":'symbol': (total% 2 == 0) ? '1.0-0': '1.2-2'}}</h6>
+                 <h6 class="fw-bold" *ngIf="total==0">{{total+2|currency:"INR":'symbol': (total% 2 == 0) ? '1.0-0': '1.2-2'}}</h6>
+            </div>
+                <button class="btn btn-purple w-100 px-5 mt-2  rounded-0 py-2 text-white fw-bold" type="button" (click)="pay()">
+                    Complete Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>    
+</div>

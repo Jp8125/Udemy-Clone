@@ -1,0 +1,36 @@
+<div class="container-fluid bg-primary-subtle py-5">
+    <div class="container-md mx-auto ">
+        <h1 class="my-2">My Learning</h1>
+        <!-- learning-page.component.html -->
+        <ng-container *ngIf="purchasedCourses.length!=0;else empty">
+            <div class="container mt-5">
+                <div class="row justify-content-center ">
+                    <div class="row row-cols-1 row-cols-md-2  row-cols-lg-4 g-2">
+                        <div class="col"  *ngFor="let course of purchasedCourses">
+                            <div class="card" style="max-width: 16em;" [routerLink]="['/Courses',course.name]">
+                                <img src="{{ course.thumbnailSrc }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ course.name }}</h5>
+                                    <p class="card-text overflow-hidden " style="max-height: 6em">{{ course.description }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+        <ng-template #empty>
+            <div>
+                <div class="d-flex justify-content-center  align-self-center ">
+                    <img class="w-50 h-50"
+                        src="https://udemy-project-bucket.s3.ap-south-1.amazonaws.com/Errors/learning.jpg"
+                        alt="image of empty cart">
+                </div>
+                <h3 class="fw-bold text-center">Start learning from over 210,000 courses today.</h3>
+                <p class="text-center">When you enroll in a course, it will appear here. <span
+                        data-purpose="courses-link"><a routerLink="/" class="text-purple">Browse now</a>.</span></p>
+            </div>
+        </ng-template>
+    </div>
+</div>

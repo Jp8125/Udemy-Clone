@@ -1,0 +1,18 @@
+.nav-link {
+    color: rgb(68, 65, 65);
+}
+
+.nav-pills .nav-link.active {
+    background-color: rgb(255, 253, 253);
+    color: rgb(3, 3, 3);
+    border-bottom: 2px solid black;
+    margin: bottom -50px !important;
+    
+}
+.hrm{
+    margin: 0px !important;
+}
+.size{
+    width: 16em;
+    height: 16em;
+}
